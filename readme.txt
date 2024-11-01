@@ -1,11 +1,11 @@
 === Footnotes Made Easy ===
-Contributors: lumiblog, dartiss, manuell
+Contributors: lumiblog, divibanks, dartiss, manuell
 Tags: bibliography, footnotes, formatting, reference
-Donate link: https://wpcorner.co/donate
+Donate link: https://divibanks.io/sponsor/
 Requires at least: 4.6
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,7 +27,7 @@ Footnotes Made Easy is a simple, but powerful, method of adding footnotes to you
 
 **Footnotes Made Easy is a fork of [WP Footnotes](https://github.com/drzax/wp-footnotes "Github - wp-footnotes"), a plugin by Simon Elvery which was abandoned some years ago**.
 
-**Please visit the [Github page](https://github.com/wpcorner/footnotes-made-easy/ "Github") for the latest code development, planned enhancements and known issues**.
+**Please visit the [Github page](https://github.com/divibanks/footnotes-made-easy/ "Github") for the latest code development, planned enhancements and known issues**.
 
 == Getting Started ==
 
@@ -106,50 +106,19 @@ Yes, the plugin provides options to disable footnotes on the home page, archives
 4. Live preview of a post page showing footnotes within the page
 5. Live preview of a post page showing the list of footnotes at the bottom of the post
 
-== Change Log ==
+== Changelog ==
 
 I use semantic versioning, with the first release being 1.0.
 
-= 3.0.4 =
-* Maintenance: WordPress 6.6 compatibilty test passed.
-
-= 3.0.3 =
-* Maintenance: Updated README to grammatically correct the content.
+= 3.0.5 [November 2, 2024] =
+* Maintenance: WordPress 6.7 Compatibility test passed.
 * Maintenance: PHP 8.2 Compatibility test passed.
-* Maintenance: AD UI Box added to the plugin's settings/options page.
+* Links on the options page updated.
 
-= 3.0.2 =
-* Maintenance: Updated this README to include the new contributor, and more FAQs. Also updated the image assets (banner and icon)
-
-= 3.0.1 =
-* Maintenance: Removed all the adoption notices.
-
-= 3.0 =
-* Maintenance: Re-release of v1.0.4, to replace the updates added by another developer.
-
-= 1.0.4 =
-* Bug: Well, I messed that release up and left some test dates in place. Apologies. This fixes it all now.
-
-= 1.0.3 =
-* Maintenance: Added notices about the plugin closure
-
-= 1.0.2 =
-* Bug: Fixed some bugs around settings getting saved (thanks to [Rufus87](https://wordpress.org/support/users/rufus87/))
-* Enhancement: Improved code to better meet VIP coding standards (not 100% yet but looking better!)
-* Enhancement: Added Github links to plugin meta. Added other useful meta as well
-* Enhancement: Minor enhancements to the way that field headings are shown in the settings
-* Enhancement: Added a further check to the settings savings function, to ensure it's not called when it's not needed (thanks to [seuser](https://wordpress.org/support/users/seuser/))
-* Maintenance: Increased minimum PHP level 5.6 after reports of issues at 5.4. Upgrade people!
-* Maintenance: Removed some redundant code from where there used to be a button on the settings screen to reset all the options
-
-= 1.0.1 =
-* Maintenance: Updated this README to display better in the new plugin repository. Also updated the image assets (banner and icon)
-* Maintenance: Minimum WordPress requirement is now 4.6. This means various checks and bits of code could be removed, including the languages folder, as this is now handled natively.
-
-= 1.0 =
-* Initial release
 
 == Upgrade Notice ==
 
-= 3.0.4 =
-* Maintenance: WordPress 6.6 compatibilty test passed. 
+= 3.0.5 =
+* Maintenance: WordPress 6.7 Compatibility test passed.
+* Maintenance: PHP 8.2 Compatibility test passed.
+* Links on the options page updated.
