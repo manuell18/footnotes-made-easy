@@ -1,6 +1,6 @@
 # Development Log
 
-## v.3.0.5 
+## v.3.0.6 
 
 To be released.
 
