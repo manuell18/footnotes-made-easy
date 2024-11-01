@@ -18,13 +18,14 @@
             <p>If you enjoy this plugin, do not forget to <a href="https://wordpress.org/support/plugin/footnotes-made-easy/reviews/?filter=5" rel="external">rate it</a>! We work hard to update it, fix bugs, add new features and make it compatible with the latest web technologies.</p>
             <p></p>
             <p style="font-size:14px">
-                <b>Featured plugins:</b>&#32;
-                🔥 <a href="https://wordpress.org/plugins/mobilize/" target="_blank" rel="external noopener">Mobilize</a> and&#32;
+                <b>Featured Plugins:</b>&#32;
+                🔥 <a href="https://wordpress.org/plugins/quick-event-calendar/" target="_blank" rel="external noopener">Quick Event Calendar</a> and&#32;
                 🚀 <a href="https://wordpress.org/plugins/search-engines-blocked-in-header/" target="_blank" rel="external noopener">Search Engines Blocked in Header</a>.&#32;
 			</p>
-			<p></p>
+			<p>To learn how to use this plugin, please refer to <a href="https://divibanks.io/wordpress-plugins/footnotes-made-easy/" rel="external">the documentation</a>. </p>
+			<p>If you find this plugin helpful and enjoy using it, consider <a href="https://divibanks.io/sponsor/" rel="external">supporting our work with a donation</a>.</p>
 			<p style="font-size:14px">
-			For WordPress related content, check out <a href="https://wpcorner.co/">WP Corner blog</a>.
+			For WordPress and Divi related content, check out <a href="https://divibanks.io/blog/">Divi Banks' Blog</a>.
             </p>
         </div>
 
@@ -148,8 +149,8 @@ if ( !empty( $_POST[ 'save_options' ] ) && ( check_admin_referer( 'footnotes-non
 
 	<div class="gb-ad">
             <div class="inside">
-                <p>For support, feature requests and bug reporting, please open an issue on <a href="https://github.com/wpcorner/footnotes-made-easy/issues/" rel="external">GitHub</a>.</p>
-                <p>&copy;<?php echo gmdate( 'Y' ); ?> <a href="https://wpcorner.co/" rel="external"><strong>WP Corner</strong></a> &middot; Code wrangling since 2005</p>
+                <p>For support, feature requests and bug reporting, please open an issue on <a href="https://github.com/divibanks/footnotes-made-easy/issues/" rel="external">GitHub</a>.</p>
+                <p>&copy;<?php echo gmdate( 'Y' ); ?> <a href="https:divibanks.io" rel="external"><strong>Divi Banks</strong></a> &middot; Building tools that make the lives of WordPress users easy.</p>
             </div>
 
 </div>
