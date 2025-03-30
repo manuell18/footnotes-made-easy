@@ -56,7 +56,7 @@ class swas_wp_footnotes {
             'upper-alpha' => 'A,B...J',
             'lower-roman' => 'i,ii...x',
             'upper-roman' => 'I,II...X',
-            'symbol' => 'Symbol'
+            'symbol' => __( 'Symbol', 'footnotes-made-easy' )
         );
 
         // Define default options
@@ -347,7 +347,7 @@ class swas_wp_footnotes {
 
 			$links = array_merge( $links, array( '<a href="https://wordpress.org/support/plugin/footnotes-made-easy">' . __( 'Support', 'footnotes-made-easy' ) . '</a>' ) );
 
-			$links = array_merge( $links, array( '<a href="https://wpcorner.co/support/footnotes-made-easy/">' . __( 'Documentation', 'footnotes-made-easy' ) . '</a>' ) );
+			$links = array_merge( $links, array( '<a href="https://divibanks.io/wordpress-plugins/footnotes-made-easy/">' . __( 'Documentation', 'footnotes-made-easy' ) . '</a>' ) );
 			
 		}
 
