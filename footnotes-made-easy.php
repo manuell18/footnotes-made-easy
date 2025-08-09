@@ -3,7 +3,7 @@
 Plugin Name: Footnotes Made Easy
 Plugin URI: https://github.com/divibanks/footnotes-made-easy/
 Description: Allows post authors to easily add and manage footnotes in posts.
-Version: 3.0.7-beta.1
+Version: 3.0.7
 Author: Patrick Lumumba
 Author URI: https://lumumbas.blog
 Text Domain: footnotes-made-easy
@@ -56,7 +56,7 @@ class swas_wp_footnotes {
             'upper-alpha' => 'A,B...J',
             'lower-roman' => 'i,ii...x',
             'upper-roman' => 'I,II...X',
-            'symbol' => __( 'Symbol', 'footnotes-made-easy' )
+            'symbol' => 'Symbol'
         );
 
         // Define default options
@@ -347,7 +347,7 @@ class swas_wp_footnotes {
 
 			$links = array_merge( $links, array( '<a href="https://wordpress.org/support/plugin/footnotes-made-easy">' . __( 'Support', 'footnotes-made-easy' ) . '</a>' ) );
 
-			$links = array_merge( $links, array( '<a href="https://divibanks.io/wordpress-plugins/footnotes-made-easy/">' . __( 'Documentation', 'footnotes-made-easy' ) . '</a>' ) );
+			$links = array_merge( $links, array( '<a href="https://wpcorner.co/support/footnotes-made-easy/">' . __( 'Documentation', 'footnotes-made-easy' ) . '</a>' ) );
 			
 		}
 
