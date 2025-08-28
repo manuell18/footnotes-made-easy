@@ -181,7 +181,6 @@ class swas_wp_footnotes
 
 	function process($data)
 	{
-
 		global $post;
 
 		// check against post existing before processing
@@ -190,23 +189,22 @@ class swas_wp_footnotes
 		}
 
 		// Ensure post exists
-
 		if (!$post) {
 			return $data;
 		}
 
-		// Check for and setup the starting number
+		// Check for shortcode BEFORE processing footnotes
+		$has_footnotes_shortcode = has_shortcode($data, 'footnotes');
 
+		// Check for and setup the starting number
 		$start_number = (1 === preg_match("|<!\-\-startnum=(\d+)\-\->|", $data, $start_number_array)) ? $start_number_array[1] : 1;
 
 		// Regex extraction of all footnotes (or return if there are none)
-
 		if (! preg_match_all("/(" . preg_quote($this->current_options['footnotes_open'], "/") . ")(.*)(" . preg_quote($this->current_options['footnotes_close'], "/") . ")/Us", $data, $identifiers, PREG_SET_ORDER)) {
 			return $data;
 		}
 
 		// Check whether we are displaying them or not
-
 		$display = true;
 		if ($this->current_options['no_display_home'] && is_home()) $display = false;
 		if ($this->current_options['no_display_archive'] && is_archive()) $display = false;
@@ -219,7 +217,6 @@ class swas_wp_footnotes
 		$footnotes = array();
 
 		// Check if this post is using a different list style to the settings
-
 		if (get_post_meta($post->ID, 'footnote_style', true) && array_key_exists(get_post_meta($post->ID, 'footnote_style', true), $this->styles)) {
 			$style = get_post_meta($post->ID, 'footnote_style', true);
 		} else {
@@ -227,11 +224,9 @@ class swas_wp_footnotes
 		}
 
 		// Create 'em
-
 		for ($i = 0; $i < count($identifiers); $i++) {
 
 			// Look for ref: and replace in identifiers array
-
 			if ('ref:' === substr($identifiers[$i][2], 0, 4)) {
 				$ref = (int)substr($identifiers[$i][2], 4);
 				$identifiers[$i]['text'] = $identifiers[$ref - 1][2];
@@ -240,7 +235,6 @@ class swas_wp_footnotes
 			}
 
 			// if we're combining identical notes check if we've already got one like this & record keys
-
 			if ($this->current_options['combine_identical_notes']) {
 				for ($j = 0; $j < count($footnotes); $j++) {
 					if ($footnotes[$j]['text'] === $identifiers[$i]['text']) {
@@ -254,7 +248,6 @@ class swas_wp_footnotes
 			if (!isset($identifiers[$i]['use_footnote'])) {
 
 				// Add footnote and record the key
-
 				$identifiers[$i]['use_footnote'] = count($footnotes);
 				$footnotes[$identifiers[$i]['use_footnote']]['text'] = $identifiers[$i]['text'];
 				$footnotes[$identifiers[$i]['use_footnote']]['symbol'] = isset($identifiers[$i]['symbol']) ? $identifiers[$i]['symbol'] : '';
@@ -263,14 +256,12 @@ class swas_wp_footnotes
 		}
 
 		// Footnotes and identifiers are stored in the array
-
 		$use_full_link = false;
 		if (is_feed()) $use_full_link = true;
 
 		if (is_preview()) $use_full_link = false;
 
 		// Display identifiers
-
 		foreach ($identifiers as $key => $value) {
 
 			$id_id = "identifier_" . $key . "_" . $post->ID;
@@ -288,8 +279,8 @@ class swas_wp_footnotes
 		// Check if footnotes should be suppressed due to shortcode usage  
 		$suppress_auto_footnotes = false;
 
-		// Check global setting
-		if ($this->current_options['suppress_when_shortcode'] && has_shortcode($data, 'footnotes')) {
+		// Check global setting - use the variable we set earlier
+		if ($this->current_options['suppress_when_shortcode'] && $has_footnotes_shortcode) {
 			$suppress_auto_footnotes = true;
 		}
 
@@ -504,16 +495,16 @@ class swas_wp_footnotes
 	function insert_styles()
 	{
 ?>
-<style type="text/css">
-<?php if ('symbol' !==$this->current_options['list_style_type']): ?>ol.footnotes>li {
-    list-style-type: <?php echo $this->current_options['list_style_type'];
-    ?>;
-}
+		<style type="text/css">
+			<?php if ('symbol' !== $this->current_options['list_style_type']): ?>ol.footnotes>li {
+				list-style-type: <?php echo $this->current_options['list_style_type'];
+									?>;
+			}
 
-<?php endif;
-?><?php echo "ol.footnotes { color:#666666; }\nol.footnotes li { font-size:80%; }\n";
-?>
-</style>
+			<?php endif;
+			?><?php echo "ol.footnotes { color:#666666; }\nol.footnotes li { font-size:80%; }\n";
+	?>
+		</style>
 <?php
 	}
 
