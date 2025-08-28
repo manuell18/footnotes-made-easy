@@ -1,0 +1,45 @@
+/**
+ * Footnotes Shortcode Styles
+ */
+.footnotes-shortcode {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-left: 4px solid #ccc;
+    border-radius: 4px;
+}
+
+.footnotes-title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #333;
+    font-weight: 500;
+}
+
+.footnotes-shortcode-list {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.footnotes-shortcode .footnote {
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    color: #666666;
+}
+
+.footnotes-shortcode .footnote-back-link-wrapper {
+    margin-left: 8px;
+}
+
+.footnotes-shortcode .footnote-link {
+    color: #043959;
+    text-decoration: underline;
+    text-decoration-color: lightgray;
+    text-decoration-thickness: 1px;
+}
+
+.footnotes-shortcode .footnote-link:hover {
+    text-decoration-color: #0a4b78;
+}
