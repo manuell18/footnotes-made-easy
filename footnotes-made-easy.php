@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Enqueue plugin styles
  */
 function fme_enqueue_styles() {
-    wp_enqueue_style( 'dbad-styles', plugin_dir_url( __FILE__ ) . 'css/dbad.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/dbad.css' ) );
+    wp_enqueue_style( 'options-styles', plugin_dir_url( __FILE__ ) . 'css/options.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/options.css' ) );
 }
 add_action( 'admin_enqueue_scripts', 'fme_enqueue_styles' );
 
