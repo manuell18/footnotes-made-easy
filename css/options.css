@@ -181,6 +181,11 @@
 	display: flex;
 	align-items: center;
 	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.toggle-switch:last-child {
+	margin-bottom: 0;
 }
 
 .toggle-switch input[type="checkbox"] {
