@@ -1,5 +1,5 @@
 === Footnotes Made Easy ===
-Contributors: lumiblog, divibanks, dartiss, manuell
+Contributors: lumiblog, dartiss, manuell
 Donate link: https://divibanks.io/sponsor/
 Tags: bibliography, footnotes, formatting, reference
 Requires at least: 6.0
