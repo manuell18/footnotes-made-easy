@@ -112,10 +112,43 @@
 .footnotes-settings-section .form-table {
 	margin: 0;
 	padding: 20px;
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.footnotes-settings-section .form-table th,
+.footnotes-settings-section .form-table td {
+	padding: 15px 10px;
+	vertical-align: top;
+}
+
+/* Form Input Spacing */
+.footnotes-settings-section .form-table input[type="text"] {
+	margin: 3px;
+	padding: 6px 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.footnotes-settings-section .form-table select {
+	margin: 3px;
+	padding: 6px 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	min-width: 100px;
+}
+
+.footnotes-settings-section .description {
+	margin-top: 8px !important;
+	margin-bottom: 5px;
+	line-height: 1.5;
 }
 
 .footnotes-settings-text {
-	padding: 20px;
+	padding: 10px;
+	overflow-x: auto;
 }
 
 /* ===================================================
@@ -181,11 +214,22 @@
 	display: flex;
 	align-items: center;
 	gap: 12px;
-	margin-bottom: 12px;
+	margin-bottom: 15px;
+	padding: 8px 0;
 }
 
 .toggle-switch:last-child {
 	margin-bottom: 0;
+}
+
+/* Multiple toggles in table cells */
+.footnotes-settings-section .form-table td .toggle-switch {
+	margin-bottom: 18px;
+	padding: 10px 0;
+}
+
+.footnotes-settings-section .form-table td .toggle-switch:last-child {
+	margin-bottom: 8px;
 }
 
 .toggle-switch input[type="checkbox"] {
@@ -451,13 +495,28 @@
 	
 	/* Toggle Responsive */
 	.toggle-switch {
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 8px;
+		flex-direction: row;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 20px;
+		padding: 12px 0;
+	}
+	
+	/* Multiple toggles in mobile table cells */
+	.footnotes-settings-section .form-table td .toggle-switch {
+		margin-bottom: 25px;
+		padding: 15px 0;
+		border-bottom: 1px solid #f0f0f0;
+	}
+	
+	.footnotes-settings-section .form-table td .toggle-switch:last-child {
+		border-bottom: none;
+		margin-bottom: 10px;
 	}
 	
 	.toggle-text {
-		font-size: 13px;
+		font-size: 14px;
+		line-height: 1.5;
 	}
 	
 	/* Quick Access Responsive */
@@ -478,6 +537,106 @@
 	.quick-access-icon svg {
 		width: 18px;
 		height: 18px;
+	}
+	
+	/* Form Table Mobile Layout */
+	.footnotes-settings-section .form-table,
+	.footnotes-settings-section .form-table tbody,
+	.footnotes-settings-section .form-table tr,
+	.footnotes-settings-section .form-table th,
+	.footnotes-settings-section .form-table td {
+		display: block;
+		width: 100%;
+	}
+	
+	.footnotes-settings-section .form-table tr {
+		border: none;
+		margin-bottom: 20px;
+		padding: 15px;
+		background: #f9f9f9;
+		border-radius: 5px;
+	}
+	
+	.footnotes-settings-section .form-table th {
+		font-weight: bold;
+		margin-bottom: 10px;
+		padding: 0 0 10px 0;
+		border-bottom: 1px solid #ddd;
+	}
+	
+	.footnotes-settings-section .form-table td {
+		padding: 10px 0 0 0;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+	
+	/* Mobile input styling */
+	.footnotes-settings-section .form-table input[type="text"] {
+		width: 100%;
+		max-width: 180px;
+		margin: 0;
+		font-size: 16px; /* Prevents iOS zoom */
+	}
+	
+	.footnotes-settings-section .form-table select {
+		width: 100%;
+		max-width: 200px;
+		margin: 0;
+		font-size: 16px;
+	}
+}
+
+/* Extra Small Mobile Devices */
+@media (max-width: 480px) {
+	.footnotes-settings-section {
+		margin: 10px;
+	}
+	
+	.footnotes-settings-section .form-table {
+		padding: 15px;
+	}
+	
+	.footnotes-settings-section .form-table input[type="text"] {
+		max-width: 150px;
+	}
+	
+	.footnotes-settings-section .form-table select {
+		max-width: 170px;
+	}
+	
+	.footnotes-settings-section h2 {
+		font-size: 14px;
+		padding: 12px 15px;
+	}
+	
+	/* Extra spacing for toggles on very small screens */
+	.footnotes-settings-section .form-table td .toggle-switch {
+		margin-bottom: 30px;
+		padding: 18px 0;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+	}
+	
+	.toggle-text {
+		font-size: 13px;
+		margin-left: 0;
+	}
+}
+
+/* Horizontal layout for larger mobile screens */
+@media (min-width: 481px) and (max-width: 768px) {
+	.footnotes-settings-section .form-table td {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+	
+	.footnotes-settings-section .form-table input[type="text"],
+	.footnotes-settings-section .form-table select {
+		flex: 0 1 auto;
+		min-width: 80px;
 	}
 }
 
