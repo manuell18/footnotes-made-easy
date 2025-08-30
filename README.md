@@ -64,4 +64,4 @@ Bug reports are best made via the plugin’s Github Issues tracker page.
 - [David Artiss](https://github.com/dartiss)
 - [Emmanuel Milimo](https://github.com/manuell18)
 
-Contributions are welcomed. [Please review the guidelines for contributing to Footnotes Made Easy](https://github.com/divibanks/footnotes-made-easy/blob/main/CONTRIBUTING.md) before submitting a pull request on GitHub.
+Contributions are welcome. [Please review the guidelines for contributing to Footnotes Made Easy](https://github.com/divibanks/footnotes-made-easy/blob/main/CONTRIBUTING.md) before submitting a pull request on GitHub.
