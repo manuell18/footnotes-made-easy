@@ -467,7 +467,7 @@ class swas_wp_footnotes {
 		?>
 		<style type="text/css">
 			<?php if ( 'symbol' !== $this->current_options[ 'list_style_type' ] ): ?>
-			ol.footnotes>li {list-style-type:<?php echo $this->current_options[ 'list_style_type' ]; ?>;}
+			ol.footnotes>li {list-style-type:<?php echo esc_html($this->current_options[ 'list_style_type' ]); ?>;}
 			<?php endif; ?>
 			<?php echo "ol.footnotes { color:#666666; }\nol.footnotes li { font-size:80%; }\n"; ?>
 		</style>
@@ -574,18 +574,20 @@ class swas_wp_footnotes {
 
 	function tooltip_scripts() {
 
-		wp_enqueue_script(
-							'wp-footnotes-tooltips',
-							plugins_url( 'js/tooltips.min.js' , __FILE__ ),
-							array(
-									'jquery',
-									'jquery-ui-widget',
-									'jquery-ui-tooltip',
-									'jquery-ui-core',
-									'jquery-ui-position'
-								)
-							);
+	wp_enqueue_script(
+						'wp-footnotes-tooltips',
+						plugins_url( 'js/tooltips.min.js' , __FILE__ ),
+						array(
+								'jquery',
+								'jquery-ui-widget',
+								'jquery-ui-tooltip',
+								'jquery-ui-core',
+								'jquery-ui-position'
+							),
+						'1.0.0',  // Add version number
+						true      // Load in footer
+						);
 
-		wp_enqueue_style( 'wp-footnotes-tt-style', plugins_url( 'css/tooltips.min.css' , __FILE__ ), array(), null );
-	}
+	wp_enqueue_style( 'wp-footnotes-tt-style', plugins_url( 'css/tooltips.min.css' , __FILE__ ), array(), '1.0.0' );
+}
 }
