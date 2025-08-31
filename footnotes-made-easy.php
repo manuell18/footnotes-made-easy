@@ -456,11 +456,11 @@ function add_options_page() {
 	$footnotes_hook = add_menu_page(
 		__( 'Footnotes Made Easy', 'footnotes-made-easy' ),  // Page title
 		__( 'Footnotes', 'footnotes-made-easy' ),           // Menu title
-		'manage_options',                                     // Capability
-		'footnotes-options-page',                            // Menu slug
-		array( $this, 'footnotes_options_page' ),           // Callback function
-		$icon_svg,                                           // Icon (your SVG)
-		26                                                   // Position (26 places it after Comments which is at 25)
+		'manage_options',                                    
+		'footnotes-options-page',                           
+		array( $this, 'footnotes_options_page' ),           
+		$icon_svg,                                           // Icon (SVG)
+		26                                                   // Position (26 places it after Comments, which is at 25)
 	);
 
 	add_action( 'load-' . $footnotes_hook, array( $this, 'footnotes_help' ) );
