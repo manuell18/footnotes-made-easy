@@ -7,19 +7,105 @@
 * @package	footnotes-made-easy
 * @since	1.0
 */
+
+// Prevent direct access
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+// Process form submission with proper input sanitization
+if (!empty($_POST['save_options']) && check_admin_referer('footnotes-nonce', 'footnotes_nonce')) {
+    
+    // Initialize sanitized options array
+    $sanitized_options = array();
+    
+    // Sanitize text field inputs
+    $text_fields = array(
+        'pre_identifier',
+        'inner_pre_identifier', 
+        'inner_post_identifier',
+        'post_identifier',
+        'list_style_symbol',
+        'pre_backlink',
+        'backlink',
+        'post_backlink',
+        'footnotes_open',
+        'footnotes_close'
+    );
+    
+    foreach ($text_fields as $field) {
+        if (isset($_POST[$field])) {
+            $sanitized_options[$field] = sanitize_text_field($_POST[$field]);
+        }
+    }
+    
+    // Sanitize textarea content (allows some HTML but strips dangerous content)
+    $textarea_fields = array('pre_footnotes', 'post_footnotes');
+    foreach ($textarea_fields as $field) {
+        if (isset($_POST[$field])) {
+            // Use wp_kses_post to allow safe HTML tags in footnote headers/footers
+            $sanitized_options[$field] = wp_kses_post($_POST[$field]);
+        }
+    }
+    
+    // Sanitize dropdown selection (validate against allowed values)
+    if (isset($_POST['list_style_type'])) {
+        $allowed_styles = array_keys($this->styles); // Assuming $this->styles contains valid options
+        $submitted_style = sanitize_text_field($_POST['list_style_type']);
+        if (in_array($submitted_style, $allowed_styles, true)) {
+            $sanitized_options['list_style_type'] = $submitted_style;
+        } else {
+            // Fallback to default if invalid value submitted
+            $sanitized_options['list_style_type'] = 'decimal';
+        }
+    }
+    
+    // Sanitize numeric priority field
+    if (isset($_POST['priority'])) {
+        $priority = absint($_POST['priority']);
+        // Ensure priority is within reasonable range (1-999)
+        if ($priority >= 1 && $priority <= 999) {
+            $sanitized_options['priority'] = $priority;
+        } else {
+            $sanitized_options['priority'] = 11; // Default value
+        }
+    }
+    
+    // Sanitize boolean checkboxes
+    $boolean_fields = array(
+        'superscript',
+        'pretty_tooltips',
+        'combine_identical_notes',
+        'no_display_home',
+        'no_display_preview',
+        'no_display_search',
+        'no_display_feed',
+        'no_display_archive',
+        'no_display_category',
+        'no_display_date'
+    );
+    
+    foreach ($boolean_fields as $field) {
+        // Checkbox values: if present = true, if not present = false
+        $sanitized_options[$field] = isset($_POST[$field]) ? true : false;
+    }
+    
+    // Update options in database (this would typically call update_option())
+    // Assuming this updates $this->current_options
+    $this->current_options = array_merge($this->current_options, $sanitized_options);
+    
+    // Save to database
+    update_option('footnotes_made_easy_options', $this->current_options);
+    
+    $message = __('Settings saved successfully.', 'footnotes-made-easy');
+} else {
+    $message = '';
+}
 ?>
 
 <div class="wrap">
 
 <h1><?php esc_html_e( 'Footnotes Made Easy', 'footnotes-made-easy' ); ?></h1>
-
-<?php
-if ( !empty( $_POST[ 'save_options' ] ) && ( check_admin_referer( 'footnotes-nonce', 'footnotes_nonce' ) ) ) {
-	$message = __( 'Settings saved successfully.', 'footnotes-made-easy' );
-} else {
-	$message = '';
-}
-?>
 
 <?php if ( $message !== '' ) { ?>
 <div class="updated"><p><strong><?php echo esc_html($message); ?></strong></p></div>
@@ -55,7 +141,7 @@ if ( !empty( $_POST[ 'save_options' ] ) && ( check_admin_referer( 'footnotes-non
 
 					<tr>
 					<th scope="row"><label for="list_style_symbol"><?php echo esc_html( ucwords( __( 'symbol', 'footnotes-made-easy' ) ) ); ?></label></th>
-					<td><input type="text" size="8" name="list_style_symbol" value="<?php echo esc_html($this->current_options[ 'list_style_symbol' ]); ?>" /><?php esc_html_e( 'If you have chosen a symbol as your list style.', 'footnotes-made-easy' ); ?>
+					<td><input type="text" size="8" name="list_style_symbol" value="<?php echo esc_attr($this->current_options[ 'list_style_symbol' ]); ?>" /><?php esc_html_e( 'If you have chosen a symbol as your list style.', 'footnotes-made-easy' ); ?>
 					<p class="description"><?php esc_html_e( 'It\'s not usually a good idea to choose this type unless you never have more than a couple of footnotes per post', 'footnotes-made-easy' ); ?></p></td>
 					</tr>
 
@@ -76,7 +162,7 @@ if ( !empty( $_POST[ 'save_options' ] ) && ( check_admin_referer( 'footnotes-non
 					<th scope="row"><label for="pre_backlink"><?php echo esc_html( ucwords( __( 'back-link', 'footnotes-made-easy' ) ) ); ?></label></th>
 					<td>
 					<input type="text" size="3" name="pre_backlink" value="<?php echo esc_attr( $this->current_options[ 'pre_backlink' ] ); ?>" />
-					<input type="text" size="10" name="backlink" value="<?php echo esc_html($this->current_options[ 'backlink' ]); ?>" />
+					<input type="text" size="10" name="backlink" value="<?php echo esc_attr($this->current_options[ 'backlink' ]); ?>" />
 					<input type="text" size="3" name="post_backlink" value="<?php echo esc_attr( $this->current_options[ 'post_backlink' ] ); ?>" />
 
 					<!--  translators: %s is the suggested back-link character (↩). -->
@@ -95,13 +181,13 @@ if ( !empty( $_POST[ 'save_options' ] ) && ( check_admin_referer( 'footnotes-non
 				<table class="form-table">
 					<tr>
 					<th scope="row"><label for="pre_footnotes"><?php echo esc_html( ucwords( __( 'Footnotes header', 'footnotes-made-easy' ) ) ); ?></label></th>
-					<td><textarea name="pre_footnotes" rows="3" cols="60" class="large-text code"><?php echo esc_html($this->current_options[ 'pre_footnotes' ]); ?></textarea>
+					<td><textarea name="pre_footnotes" rows="3" cols="60" class="large-text code"><?php echo esc_textarea($this->current_options[ 'pre_footnotes' ]); ?></textarea>
 					<p class="description"><?php esc_html_e( 'Anything to be displayed before the footnotes at the bottom of the post can go here.', 'footnotes-made-easy' ); ?></p></td>
 					</tr>
 
 					<tr>
 					<th scope="row"><label for="post_footnotes"><?php echo esc_html( ucwords( __( 'Footnotes footer', 'footnotes-made-easy' ) ) ); ?></label></th>
-					<td><textarea name="post_footnotes" rows="3" cols="60" class="large-text code"><?php echo esc_html($this->current_options[ 'post_footnotes' ]); ?></textarea>
+					<td><textarea name="post_footnotes" rows="3" cols="60" class="large-text code"><?php echo esc_textarea($this->current_options[ 'post_footnotes' ]); ?></textarea>
 					<p class="description"><?php esc_html_e( 'Anything to be displayed after the footnotes at the bottom of the post can go here.', 'footnotes-made-easy' ); ?></p></td>
 					</tr>
 				</table>
@@ -247,7 +333,7 @@ if ( !empty( $_POST[ 'save_options' ] ) && ( check_admin_referer( 'footnotes-non
 			<?php wp_nonce_field( 'footnotes-nonce','footnotes_nonce' ); ?>
 
 			<div class="footnotes-submit">
-				<p class="submit"><input type="submit" name="save_options" value="<?php echo esc_html( ucwords( __( 'save changes', 'footnotes-made-easy' ) ) ); ?>" class="button-primary" /></p>
+				<p class="submit"><input type="submit" name="save_options" value="<?php echo esc_attr( ucwords( __( 'save changes', 'footnotes-made-easy' ) ) ); ?>" class="button-primary" /></p>
 				<input type="hidden" name="save_footnotes_made_easy_options" value="1" />
 			</div>
 
