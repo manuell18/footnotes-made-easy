@@ -1,13 +1,18 @@
 <?php
 /*
-Plugin Name: Footnotes Made Easy
-Plugin URI: https://github.com/divibanks/footnotes-made-easy/
-Description: Allows post authors to easily add and manage footnotes in posts.
-Version: 3.0.7
-Author: Patrick Lumumba
-Author URI: https://lumumbas.blog
-Text Domain: footnotes-made-easy
-*/
+ * Plugin Name:       Footnotes Made Easy
+ * Plugin URI:        https://lumumbas.blog/plugins/footnotes-made-easy/
+ * Description:       Allows post authors to easily add and manage footnotes in posts.
+ * Version:           4.0.0-beta.1
+ * Requires at least: 6.0
+ * Requires PHP:      7.4
+ * Author:            Patrick Lumumba
+ * Author URI:        https://lumumbas.blog
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       footnotes-made-easy
+ * Domain Path:       /languages
+ */
 
 /**
  * Footnotes Made Easy
@@ -26,9 +31,14 @@ if (! defined('ABSPATH')) {
 /**
  * Enqueue plugin styles...
  */
+<<<<<<< HEAD
 function fme_enqueue_styles()
 {
 	wp_enqueue_style('dbad-styles', plugin_dir_url(__FILE__) . 'css/dbad.css', array(), filemtime(plugin_dir_path(__FILE__) . 'css/dbad.css'));
+=======
+function fme_enqueue_styles() {
+    wp_enqueue_style( 'options-styles', plugin_dir_url( __FILE__ ) . 'css/options.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/options.css' ) );
+>>>>>>> 04eb4f9e6857c2377a32b8ab356a1d429b24b988
 }
 add_action('admin_enqueue_scripts', 'fme_enqueue_styles');
 
@@ -369,6 +379,7 @@ class swas_wp_footnotes
 	function plugin_meta($links, $file)
 	{
 
+<<<<<<< HEAD
 		if (false !== strpos($file, 'footnotes-made-easy.php')) {
 
 			$links = array_merge($links, array('<a href="https://github.com/wpcorner/footnotes-made-easy/">' . __('Github', 'footnotes-made-easy') . '</a>'));
@@ -377,7 +388,16 @@ class swas_wp_footnotes
 
 			$links = array_merge($links, array('<a href="https://wpcorner.co/support/footnotes-made-easy/">' . __('Documentation', 'footnotes-made-easy') . '</a>'));
 		}
+=======
+		if ( false !== strpos( $file, 'footnotes-made-easy.php' ) ) {
+			
+			$links[] = '<a class="footnotes-made-easy-review" href="https://wordpress.org/support/plugin/footnotes-made-easy/reviews/#new-post" target="_blank" rel="noopener noreferrer" title="' . esc_attr__( 'Rate our plugin', 'footnotes-made-easy' ) . '">
+					<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+					</a>';
+>>>>>>> 04eb4f9e6857c2377a32b8ab356a1d429b24b988
 
+		echo '<style>.footnotes-made-easy-review span,.footnotes-made-easy-review span:hover{color:#ffb900}.footnotes-made-easy-review span:hover~span{color:#888}</style>';
+		}
 		return $links;
 	}
 
@@ -467,6 +487,7 @@ class swas_wp_footnotes
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Add to Admin
 	 *
 	 * Add the options page to the admin menu
@@ -476,13 +497,46 @@ class swas_wp_footnotes
 
 	function add_options_page()
 	{
+=======
+* Add to Admin
+*
+* Add the footnotes page as a standalone menu item
+*
+* @since	4.0.0
+*/
 
-		global $footnotes_hook;
+function add_options_page() {
+>>>>>>> 04eb4f9e6857c2377a32b8ab356a1d429b24b988
 
+	global $footnotes_hook;
+
+<<<<<<< HEAD
 		$footnotes_hook = add_options_page(__('Footnotes Made Easy', 'footnotes-made-easy'), __('Footnotes', 'footnotes-made-easy'), 'manage_options', 'footnotes-options-page', array($this, 'footnotes_options_page'));
 
 		add_action('load-' . $footnotes_hook, array($this, 'footnotes_help'));
 	}
+=======
+	$plugin_menu_icon = null;
+
+	// SVG icon - already base64 encoded
+	$icon_svg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiAjZjk4MjZjOwogICAgICB9CgogICAgICAuY2xzLTEsIC5jbHMtMiB7CiAgICAgICAgc3Ryb2tlLXdpZHRoOiAwcHg7CiAgICAgIH0KCiAgICAgIC5jbHMtMiB7CiAgICAgICAgZmlsbDogI2ZmZjsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPGcgaWQ9IkxheWVyXzEtMiIgZGF0YS1uYW1lPSJMYXllciAxIj4KICAgIDxnPgogICAgICA8Y2lyY2xlIGNsYXNzPSJjbHMtMSIgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMjU2Ii8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTM2OC4yLDQwNS44NWgtMTM3LjIzYy01OC41MywwLTEwNi4xNC00Ny42Mi0xMDYuMTQtMTA2LjE1VjEwNi4xNWgxNjkuMzVjMzAuODcsMCw1NS45OCwyNS4xMSw1NS45OCw1NS45OSwwLDI0LjYyLTE1Ljc4LDQ1LjYyLTM3Ljc1LDUzLjQydjIuODJoMjAuNDVjMjkuOTUsMCw1NC4zMSwyNC4zNyw1NC4zMSw1NC4zMSwwLDMyLjE3LTI2LjE3LDU4LjM0LTU4LjM0LDU4LjM0aC02Ny4zNmMtMzQuMDYsMC02MS43Ny0yNy43MS02MS43Ny02MS43N3YtMTI1LjI4aC0zNy4wNHYxNTUuNzJjMCwzNy42NywzMC42NSw2OC4zMSw2OC4zMSw2OC4zMWgxMzcuMjN2MzcuODNaTTIzNy41MywxNDMuOTh2MTI1LjI4YzAsMTMuMiwxMC43NCwyMy45NCwyMy45NCwyMy45NGg2Ny4zNmMxMS4zMSwwLDIwLjUxLTkuMiwyMC41MS0yMC41MSwwLTkuMDktNy4zOS0xNi40OC0xNi40OC0xNi40OGgtNTguMjl2LTc1LjI1aDE4LjkyYzEwLjM4LDAsMTguODMtOC40NSwxOC44My0xOC44M3MtOC4xNC0xOC4xNS0xOC4xNS0xOC4xNWgtNTYuNjRaIi8+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4=';
+	
+	$plugin_menu_icon = plugin_dir_url( __FILE__ ) .'img/icon.svg';
+
+	// Add as top-level menu item positioned after Comments
+	$footnotes_hook = add_menu_page(
+		__( 'Footnotes Made Easy', 'footnotes-made-easy' ),  // Page title
+		__( 'Footnotes', 'footnotes-made-easy' ),           // Menu title
+		'manage_options',                                    
+		'footnotes-options-page',                           
+		array( $this, 'footnotes_options_page' ),           
+		$plugin_menu_icon,                                           // Icon (SVG)
+		26                                                   // Position (26 places it after Comments, which is at 25)
+	);
+
+	add_action( 'load-' . $footnotes_hook, array( $this, 'footnotes_help' ) );
+}
+>>>>>>> 04eb4f9e6857c2377a32b8ab356a1d429b24b988
 
 	/**
 	 * Insert additional CSS
@@ -496,6 +550,7 @@ class swas_wp_footnotes
 	{
 ?>
 		<style type="text/css">
+<<<<<<< HEAD
 			<?php if ('symbol' !== $this->current_options['list_style_type']): ?>ol.footnotes>li {
 				list-style-type: <?php echo $this->current_options['list_style_type'];
 									?>;
@@ -504,6 +559,12 @@ class swas_wp_footnotes
 			<?php endif;
 			?><?php echo "ol.footnotes { color:#666666; }\nol.footnotes li { font-size:80%; }\n";
 	?>
+=======
+			<?php if ( 'symbol' !== $this->current_options[ 'list_style_type' ] ): ?>
+			ol.footnotes>li {list-style-type:<?php echo esc_html($this->current_options[ 'list_style_type' ]); ?>;}
+			<?php endif; ?>
+			<?php echo "ol.footnotes { color:#666666; }\nol.footnotes li { font-size:80%; }\n"; ?>
+>>>>>>> 04eb4f9e6857c2377a32b8ab356a1d429b24b988
 		</style>
 <?php
 	}
@@ -611,6 +672,7 @@ class swas_wp_footnotes
 	function tooltip_scripts()
 	{
 
+<<<<<<< HEAD
 		wp_enqueue_script(
 			'wp-footnotes-tooltips',
 			plugins_url('js/tooltips.min.js', __FILE__),
@@ -861,4 +923,22 @@ class swas_wp_footnotes
 			delete_post_meta($post_id, 'footnote_style');
 		}
 	}
+=======
+	wp_enqueue_script(
+						'wp-footnotes-tooltips',
+						plugins_url( 'js/tooltips.min.js' , __FILE__ ),
+						array(
+								'jquery',
+								'jquery-ui-widget',
+								'jquery-ui-tooltip',
+								'jquery-ui-core',
+								'jquery-ui-position'
+							),
+						'1.0.0',  // Add version number
+						true      // Load in footer
+						);
+
+	wp_enqueue_style( 'wp-footnotes-tt-style', plugins_url( 'css/tooltips.min.css' , __FILE__ ), array(), '1.0.0' );
+}
+>>>>>>> 04eb4f9e6857c2377a32b8ab356a1d429b24b988
 }
