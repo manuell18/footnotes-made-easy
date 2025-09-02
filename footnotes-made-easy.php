@@ -24,7 +24,7 @@ if (! defined('ABSPATH')) {
 }
 
 /**
- * Enqueue plugin styles
+ * Enqueue plugin styles...
  */
 function fme_enqueue_styles()
 {
